@@ -8,28 +8,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.board.dao.BoardDAO;
+import kr.board.entity.Board;
 
-@WebServlet("/boardDelete.do")
-public class BoardDeleteController extends HttpServlet {
+@WebServlet("/boardUpdate.do")
+public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    public BoardDeleteController() {
+       
+    public BoardUpdateController() {
         super();
-        // TODO Auto-generated constructor stubint num = Integer.parseInt(request.getParameter("num"));
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// request에서 파라미터 수집
-		int num = Integer.parseInt(request.getParameter("num"));
-		
-		// Model과 연동
+		request.setCharacterEncoding("euc-kr");
 		BoardDAO dao = new BoardDAO();
-		int cnt = dao.boardDelete(num);
+		Board vo = new Board();
 		
-		if (cnt > 0) {
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		vo.setNum(num);
+		vo.setTitle(title);
+		vo.setContent(content);
+		
+		int cnt = dao.boardUpdate(vo);
+		if(cnt > 0) {
 			response.sendRedirect("/MVC01/boardList.do");
 		} else {
-			throw new ServletException("Delete Error");
+			throw new ServletException("not update");
 		}
 	}
 

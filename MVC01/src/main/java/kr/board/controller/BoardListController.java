@@ -39,7 +39,6 @@ public class BoardListController extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td>번호</td>");
 		out.println("<td>제목</td>");
-		out.println("<td>내용</td>");
 		out.println("<td>작성자</td>");
 		out.println("<td>작성일</td>");
 		out.println("<td>조회수</td>");
@@ -49,7 +48,6 @@ public class BoardListController extends HttpServlet {
 			out.println("<tr>");
 			out.println("<td>" + vo.getNum() + "</td>");
 			out.println("<td><a href='boardView.do?num=" + vo.getNum() + "'>" + vo.getTitle() + "</a></td>");
-			out.println("<td>" + vo.getContent() + "</td>");
 			out.println("<td>" + vo.getWriter() + "</td>");
 			out.println("<td>" + vo.getIndate() + "</td>");
 			out.println("<td>" + vo.getCount() + "</td>");

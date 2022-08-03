@@ -121,6 +121,28 @@ public class BoardDAO {
 		return cnt;
 	}	// _boardDelete_
 	
+	public int boardUpdate(Board vo) {
+		String sql = "update BOARD set title = ?, content = ? where num = ?";
+		conn = getConnect();
+		int cnt = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getTitle());
+			ps.setString(2, vo.getContent());
+			ps.setInt(3, vo.getNum());
+			
+			cnt = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		
+		return cnt;
+	}
+	
 	// _boardView_
 	public Board boardView(int num) {
 		String sql = "select * from BOARD where num = ?";
