@@ -1,6 +1,5 @@
 package kr.board.controller;
 
-import java.util.List;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,21 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import kr.board.dao.BoardDAO;
 import kr.board.entity.Board;
 
-@WebServlet("/boardList.do")
-public class BoardListController extends HttpServlet {
-
+@WebServlet("/boardUpdateForm.do")
+public class BoardUpdateFormController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int num = Integer.parseInt(request.getParameter("num"));
 		
 		BoardDAO dao = new BoardDAO();
-		List<Board> list = dao.boardAllList();
+		Board vo = dao.boardView(num);
 		
-		// View(jsp)와 연동하기
-		request.setAttribute("list", list);	// 객체(request) 바인딩
+		request.setAttribute("vo", vo);
 		
-		// jsp(View)로 갈때는 forward로
-		RequestDispatcher rd = request.getRequestDispatcher("board/boardList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("board/boardUpdate.jsp");
 		rd.forward(request, response);
-		
 	}
 
 }

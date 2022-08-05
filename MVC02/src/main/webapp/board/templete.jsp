@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="container">
+	<jsp:include page="../header/header.jsp"/>
 	  <h2>MVC02</h2>
 	  <div class="panel panel-success">
 	    <div class="panel-heading">BOARD</div>
