@@ -12,21 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import kr.board.dao.BoardDAO;
 import kr.board.entity.Board;
 
-@WebServlet("/boardView.do")
-public class BoardViewController extends HttpServlet {
+
+public class BoardUpdateFormController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
+		
 		BoardDAO dao = new BoardDAO();
 		Board vo = dao.boardView(num);
 		
-		if(vo != null) {
-			dao.countUpdate(num);
-			request.setAttribute("vo", vo);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("board/boardView.jsp");
-			rd.forward(request, response);
-		} else {
-			throw new ServletException("not select");
-		}
+		request.setAttribute("vo", vo);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("board/boardUpdate.jsp");
+		rd.forward(request, response);
 	}
+
 }

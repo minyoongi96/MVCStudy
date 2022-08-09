@@ -7,17 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/")
-public class IndexController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import kr.board.dao.BoardDAO;
 
-    public IndexController() {
-        super();
-    }
 
+public class BoardDeleteController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int num = Integer.parseInt(request.getParameter("num"));
+		String cpath = request.getContextPath();
 		
-		//response.sendRedirect("index.jsp");	//파일명이 url에 나타나게 됨
+		BoardDAO dao = new BoardDAO();
+		int cnt = dao.boardDelete(num);
+		
+		if(cnt > 0) {
+			response.sendRedirect(cpath + "/boardList.do");
+		} else {
+			throw new ServletException("not delete");
+		}
 	}
 
 }

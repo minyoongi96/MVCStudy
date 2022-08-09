@@ -1,10 +1,8 @@
-<%@page import="kr.board.entity.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-Board vo = (Board)request.getAttribute("vo");
- %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,32 +16,32 @@ Board vo = (Board)request.getAttribute("vo");
 <body>
 	<div class="container">
 	<jsp:include page="../header/header.jsp"/>
-	  <h2>MVC02</h2>
+	  <h2>MVC03</h2>
 	  <div class="panel panel-success">
 	    <div class="panel-heading">게시물 수정</div>
 	    <div class="panel-body">
-	    	<form action="/MVC02/boardUpdate.do" method="post">
-	    		<input type="hidden" name="num" value="<%=vo.getNum()%>"/>
+	    	<form action="${cpath}/boardUpdate.do" method="post">
+	    		<input type="hidden" name="num" value="${vo.num }"/>
 		    	<table class="table table-striped table-hover">
 		    		<tr>
 		    			<td>제목</td>
-		    			<td><input type="text" name="title" class="form-control" value="<%=vo.getTitle() %>"/></td>
+		    			<td><input type="text" name="title" class="form-control" value="${vo.title }"/></td>
 		    		</tr>
 		    		<tr>
 		    			<td>작성자</td>
-		    			<td><%=vo.getWriter() %></td>
+		    			<td>${vo.writer }</td>
 		    		</tr>
 		    		<tr>
 		    			<td>제목</td>
-		    			<td><textarea name="content" rows="15" class="form-control" style="resize: none;"><%=vo.getContent() %></textarea></td>
+		    			<td><textarea name="content" rows="15" class="form-control" style="resize: none;">${vo.content }</textarea></td>
 		    		</tr>
 		    		<tr>
 		    			<td colspan="2" align="right">
-		    				<button type="submit" class="btn btn-success btn-primary btn-sm" onclick="location.href='/MVC02/boardUpdate.do'">수정</button>
+		    				<button type="submit" class="btn btn-success btn-primary btn-sm" onclick="location.href='${cpath}/boardUpdate.do'">수정</button>
 		    				<button type="reset" class="btn btn-warning btn-sm">취소</button>
 		    			</td>
 		    			<td align="left">
-		    				<button type="button" class="btn btn-success btn-sm" onclick="location.href='/MVC02/boardList.do'">목록</button>
+		    				<button type="button" class="btn btn-success btn-sm" onclick="location.href='${cpath}/boardList.do'">목록</button>
 		    			</td>
 		    		</tr>
 		    	</table>
