@@ -15,6 +15,7 @@ public class HandlerMapping {
 		mappings.put("/boardUpdateForm.do", new BoardUpdateFormController());
 		mappings.put("/boardUpdate.do", new BoardUpdateController());
 		mappings.put("/calc.do", new CalController());
+		mappings.put("/index.do", new IndexController());
 	}
 	
 	public Controller getController(String command) {
